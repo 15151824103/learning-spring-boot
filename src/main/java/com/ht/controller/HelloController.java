@@ -1,6 +1,8 @@
 package com.ht.controller;
 
+import com.ht.entity.Family;
 import com.ht.entity.Users;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -8,6 +10,9 @@ import java.util.Date;
 //相当于@Controller + @ResponseBody，此注解打在类上，可以替代@ResponseBody注解，这样就不需要每个方法都打@ResponseBody注解了
 @RestController
 public class HelloController {
+
+    @Autowired
+    private Family family;
 
     @RequestMapping("/hello")
     public Users hello() {
@@ -35,6 +40,11 @@ public class HelloController {
     public Users add(@RequestBody Users user) {
         System.out.println(user.getName());
         return user;
+    }
+
+    @GetMapping("/family")
+    public Family family() {
+        return family;
     }
 
 }
