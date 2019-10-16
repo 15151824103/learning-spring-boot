@@ -1,16 +1,3 @@
-family:
-  family-name: hetaozhijia
-  father:
-    father-name: taoge
-    father-age: 32
-  mother:
-    mother-name: lzll
-    mother-age: 24
-  child:
-    child-name: hh
-    child-age: 22
-    friends:
-      - people-name: xzmly
-        people-age: 22
-      - people-name: wtl
-        people-age: 34
+spring:
+  profiles:
+    active: test

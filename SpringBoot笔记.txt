@@ -1,0 +1,47 @@
+						                 Spring Boot
+
+
+SpringBoot 的目录结构：
+                    src--main    下的  java：存放的是项目的 类文件，也就是源代码
+              项目默认创建的包里面的类：是Spring Boot项目的启动入口类，因为Boot集成了Tomcat，所有运行此类即可运行此项目
+                                                           并且此类会管理所有类，所以应放在所有类包外
+                                      resources ：存放的是项目的资源
+                                                        resources 下的 static：存放的是项目的静态资源，如 CSS，JS，图片等
+                                                                         templates：存放的是模板页面，****而且spring boot不支持--jsp页面
+                                      application.properties/yml：是Spring Boot的配置文件，它可以修改一下spring boot的默认配置
+                     src--test：此目录为项目的测试目录
+
+@SpringBootApplication 注解：
+                                         作用：被加上此注解的类，便可管理其类所在包和所有子包下的所有bean
+此注解由以下三个主要注解构成：
+                                                 @SpringBootConfiguration
+                                                         @Configuration：用于定义加上此注解的类为配置类，等同于配置文件
+                                                                 @Component：加上此注解的类会被spring认为是一个bean(组件类)
+                                                 @EnableAutoConfiguration
+                                                         @AutoConfigurationPackage：此注解会引导及其类所在包和所有子包下的所有bean，并管理
+                                                         @Import：将所有组件以全类名的方式返回，并添加到spring容器中，还会为容器中导入许多自动配置类
+                                                 @ComponentScan：此注解就是标识一个类，被标识的类会被纳入spring管理
+
+spring boot 配置文件的放置位置：
+                    1，可以放在 根目录下，即与 src目录 同级
+                    2，可以放在 根目录下，config文件夹里
+                    3，可以放在 resource目录下，即 classpath路径
+                    4，可以放在 resource目录下，config文件夹里
+
+spring boot 可以通过引入不同的配置 (proFile) 文件，来切换不同的运行环境                    
+                    1.首先自带的配置文件，为全局配置文件，或者说为主配置文件都可以
+                               全局配置文件：application.yml
+                               全局配置文件，只需引用其他子配置文件即可做到不同环境的切换，通过
+                                                       spring.profiles.active=dev   或   spring:
+                                                                                                               profiles:
+    							    active: dev
+                    然后定义同样的子配置文件，写一下不同的环境配置 如 （子配置文件的优先级高于全局配置文件）
+                               application-dev.yml
+                               application-test.yml
+
+                    2.但是工作中主要通过命令行的方式来切换环境（外部的优先级高于内部）
+                            因为，项目会被打成，jar包，war包，：
+                                       java -jar jar包全名 --spring.profiles.active=dev
+                                       java -jar jar包全名 --spring.profiles.active=C:/application.properties
+                   
+                    3.是IDE自带的方式，懒得在写了
